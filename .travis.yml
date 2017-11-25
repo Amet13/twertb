@@ -1,0 +1,13 @@
+# Add variables TOKEN and ID in TravisCI settings
+
+language: python
+
+python:
+  - "3.6"
+  - "nightly"
+
+script:
+  - ./__main__.py -s EUR -t USD -g no
+  - ./__main__.py -s RUB -t USD -g yes
+  - ./__main__.py -s RUB -t USD -g no --token $TOKEN --id $ID
+  - ./__main__.py -s EUR -t RUB -g yes --token $TOKEN --id $ID
