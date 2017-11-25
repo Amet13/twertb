@@ -31,14 +31,14 @@ optional arguments:
 ```
 $ ./twertb.py -s EUR -t USD -u
 Currency database updated
-1EUR = 1.193USD at 2017-11-25T11:24:53+0000
+1EUR = 1.193USD
 ```
 
 ### Get exchange rate for `GBP/RUB` without updating database:
 
 ```
 $ ./twertb.py -s GBP -t RUB
-1GBP = 77.88126RUB at 2017-11-25T11:24:57+0000
+1GBP = 77.88126RUB
 ```
 
 ## Send exchange rates to Telegram
@@ -53,20 +53,18 @@ $ ./twertb.py -s GBP -t RUB
 ```
 TOKEN='111111111:ABCDE'
 ID='123456789'
-$ ./twertb.py -s EUR -t USD --token ${TOKEN} --id ${ID}
-1EUR = 1.193USD at 2017-11-25T12:04:46+0000
+$ ./twertb.py -s EUR -t RUB --token ${TOKEN} --id ${ID}
+1 EUR = 69.66249 RUB
 Message sent to Telegram
 ```
 
-### Screenshot
-
-![](https://raw.githubusercontent.com/Amet13/twertb/master/misc/screenshot.jpg)
+![](https://raw.githubusercontent.com/Amet13/twertb/master/misc/message.jpg)
 
 ## Autoupdate currencies
 
 ```
 $ crontab -e
-*/5 * * * * cd /path/to/twertb/ ; ./twertb.py -s EUR -t USD -u --token ${TOKEN} --id ${ID} &> /dev/null
+*/5 * * * * cd /path/to/twertb/ ; ./twertb.py -s EUR -t RUB -u --token ${TOKEN} --id ${ID} &> /dev/null
 ```
 
 ## Serverless usage via GitHub and TravisCI
