@@ -4,12 +4,12 @@ Withdraw your money from Transferwise account with a favorable exchange rate.
 
 ## Usage
 
-Clone repo:
+### Clone repo:
 ```
 $ git clone https://github.com/Amet13/twertb
 ```
 
-Get help:
+### Get help:
 ```
 $ python3 twertb/ -h
 usage: [-h] -s SOURCE -t TARGET -g GETDATA
@@ -24,19 +24,20 @@ optional arguments:
                         set 'yes' if need to update database?
 ```
 
-Get last currency database to json file and check currency for `EUR/USD`:
+### Get last currency database and get exchange rate for `EUR/USD`:
 ```
 $ python3 twertb -s EUR -t USD -g yes
+Currency database updated
 1EUR = 1.193USD at 2017-11-25T11:24:53+0000
 ```
 
-Check currency for `GBP/RUB` without updating database:
+### Get exchange rate for `GBP/RUB` without updating database:
 ```
 $ python3 twertb -s GBP -t RUB -g no
 1GBP = 77.88126RUB at 2017-11-25T11:24:57+0000
 ```
 
-## Use Telegram
+## Send exchange rates to Telegram
 
 * go to [@BotFather](https://t.me/BotFather) and create `/newbot`, for example `TWERTB_bot`
 * then you have token like `111111111:ABCDE...`
@@ -50,7 +51,7 @@ $ python3 twertb -s EUR -t USD -g no --token 111111111:ABCDE --id 123456789
 Message sent to Telegram
 ```
 
-![](https://raw.githubusercontent.com/Amet13/twertb/master/screenshot.png)
+![](https://raw.githubusercontent.com/Amet13/twertb/master/misc/screenshot.jpg)
 
 ## Autoupdate databases
 

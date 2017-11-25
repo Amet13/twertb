@@ -64,6 +64,7 @@ def getJsonData():
     parsed = json.loads(text)
     with open(output_json_file, 'w') as file:
         file.write(json.dumps(parsed, indent=4, sort_keys=True))
+    print('Currency database updated')
 
 def getCurrency():
     currency_data = json.loads(open(output_json_file).read())
