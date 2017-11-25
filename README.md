@@ -73,9 +73,4 @@ $ crontab -e
 
 Just enable daily Cron Job in TravisCI settings and get exchange rate every day.
 
-![](https://raw.githubusercontent.com/Amet13/twertb/master/misc/cronjob.jpg)
-
-## TODO
-
-* Telegram bot (client/server)
-* Free hosting for bot
+![](https://raw.githubusercontent.com/Amet13/twertb/master/misc/cronjob.png)
