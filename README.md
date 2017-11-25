@@ -1,6 +1,7 @@
 # TransferWise Exchange Rate Telegram Bot
 
 [![TravisCI](https://travis-ci.org/Amet13/twertb.svg?branch=master)](https://travis-ci.org/Amet13/twertb/)
+[![License](https://img.shields.io/badge/license-GNU_GPLv3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 
 Withdraw your money from Transferwise account with a favorable exchange rate
 
@@ -12,7 +13,7 @@ Withdraw your money from Transferwise account with a favorable exchange rate
 $ git clone https://github.com/Amet13/twertb
 $ cd twertb/
 $ python3 . -h
-usage: [-h] -s SOURCE -t TARGET -g GETDATA
+usage: . [-h] -s SOURCE -t TARGET -g GETDATA [--token TGTOKEN] [--id TGID]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -22,6 +23,8 @@ optional arguments:
                         target currency
   -g GETDATA, --get-data GETDATA
                         set 'yes' if need to update database?
+  --token TGTOKEN       set telegram token
+  --id TGID             set telegram id
 ```
 
 ### Get last currency database and get exchange rate for `EUR/USD`:
@@ -70,5 +73,4 @@ $ crontab -e
 ## TODO
 
 * Telegram bot (client/server)
-* TravisCI cron autoupdate database
-* Free hosting for it
+* Free hosting for bot

@@ -1,10 +1,7 @@
 # Do not forget to add variables TOKEN and ID in TravisCI settings
-
 language: python
-
 python:
   - "3.6"
-
 script:
   - ./__main__.py -s EUR -t USD -g no
   - ./__main__.py -s RUB -t USD -g yes
