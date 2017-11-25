@@ -4,7 +4,6 @@ language: python
 
 python:
   - "3.6"
-  - "nightly"
 
 script:
   - ./__main__.py -s EUR -t USD -g no

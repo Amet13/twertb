@@ -35,7 +35,6 @@ def parseArguments():
     else:
         get_data = False
 
-    #print(namespace.TGTOKENID[0])
     try:
         tg_token = namespace.TGTOKEN
         tg_id = namespace.TGID

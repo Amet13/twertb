@@ -1,6 +1,8 @@
 # TransferWise Exchange Rate Telegram Bot
 
-Withdraw your money from Transferwise account with a favorable exchange rate.
+[![TravisCI](https://travis-ci.org/Amet13/twertb.svg?branch=master)](https://travis-ci.org/Amet13/twertb/)
+
+Withdraw your money from Transferwise account with a favorable exchange rate
 
 ## Usage
 
@@ -8,7 +10,8 @@ Withdraw your money from Transferwise account with a favorable exchange rate.
 
 ```
 $ git clone https://github.com/Amet13/twertb
-$ python3 twertb/ -h
+$ cd twertb/
+$ python3 . -h
 usage: [-h] -s SOURCE -t TARGET -g GETDATA
 
 optional arguments:
@@ -24,7 +27,7 @@ optional arguments:
 ### Get last currency database and get exchange rate for `EUR/USD`:
 
 ```
-$ python3 twertb -s EUR -t USD -g yes
+$ python3 . -s EUR -t USD -g yes
 Currency database updated
 1EUR = 1.193USD at 2017-11-25T11:24:53+0000
 ```
@@ -32,7 +35,7 @@ Currency database updated
 ### Get exchange rate for `GBP/RUB` without updating database:
 
 ```
-$ python3 twertb -s GBP -t RUB -g no
+$ python3 . -s GBP -t RUB -g no
 1GBP = 77.88126RUB at 2017-11-25T11:24:57+0000
 ```
 
@@ -48,7 +51,7 @@ $ python3 twertb -s GBP -t RUB -g no
 ```
 TOKEN='111111111:ABCDE'
 ID='123456789'
-$ python3 twertb -s EUR -t USD -g no --token ${TOKEN} --id ${ID}
+$ python3 . -s EUR -t USD -g no --token ${TOKEN} --id ${ID}
 1EUR = 1.193USD at 2017-11-25T12:04:46+0000
 Message sent to Telegram
 ```
@@ -61,7 +64,7 @@ Message sent to Telegram
 
 ```
 $ crontab -e
-*/5 * * * * cd /path/to/twertb/ ; ./__main__.py -s EUR -t USD -g yes --token ${TOKEN} --id ${ID} &> /dev/null
+*/5 * * * * cd /path/to/twertb/ ; /usr/bin/python3 . -s EUR -t USD -g yes --token ${TOKEN} --id ${ID} &> /dev/null
 ```
 
 ## TODO
