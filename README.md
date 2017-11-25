@@ -12,25 +12,24 @@ Withdraw your money from Transferwise account with a favorable exchange rate
 ```
 $ git clone https://github.com/Amet13/twertb
 $ cd twertb/
-$ python3 . -h
-usage: . [-h] -s SOURCE -t TARGET -g GETDATA [--token TGTOKEN] [--id TGID]
+$ ./twertb.py -h
+usage: twertb.py [-h] [-u] -s SOURCE -t TARGET [--token TG_TOKEN] [--id TG_ID]
 
 optional arguments:
   -h, --help            show this help message and exit
+  -u, --update          update currency rates
   -s SOURCE, --source SOURCE
                         source currency
   -t TARGET, --target TARGET
                         target currency
-  -g GETDATA, --get-data GETDATA
-                        set 'yes' if need to update database?
-  --token TGTOKEN       set telegram token
-  --id TGID             set telegram id
+  --token TG_TOKEN      telegram token
+  --id TG_ID            telegram id
 ```
 
 ### Get last currency database and get exchange rate for `EUR/USD`:
 
 ```
-$ python3 . -s EUR -t USD -g yes
+$ ./twertb.py -s EUR -t USD -u
 Currency database updated
 1EUR = 1.193USD at 2017-11-25T11:24:53+0000
 ```
@@ -38,7 +37,7 @@ Currency database updated
 ### Get exchange rate for `GBP/RUB` without updating database:
 
 ```
-$ python3 . -s GBP -t RUB -g no
+$ ./twertb.py -s GBP -t RUB
 1GBP = 77.88126RUB at 2017-11-25T11:24:57+0000
 ```
 
@@ -54,7 +53,7 @@ $ python3 . -s GBP -t RUB -g no
 ```
 TOKEN='111111111:ABCDE'
 ID='123456789'
-$ python3 . -s EUR -t USD -g no --token ${TOKEN} --id ${ID}
+$ ./twertb.py -s EUR -t USD --token ${TOKEN} --id ${ID}
 1EUR = 1.193USD at 2017-11-25T12:04:46+0000
 Message sent to Telegram
 ```
@@ -67,7 +66,7 @@ Message sent to Telegram
 
 ```
 $ crontab -e
-*/5 * * * * cd /path/to/twertb/ ; /usr/bin/python3 . -s EUR -t USD -g yes --token ${TOKEN} --id ${ID} &> /dev/null
+*/5 * * * * cd /path/to/twertb/ ; ./twertb.py -s EUR -t USD -u --token ${TOKEN} --id ${ID} &> /dev/null
 ```
 
 ## TODO
