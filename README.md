@@ -51,6 +51,8 @@ $ python3 twertb -s EUR -t USD -g no --token 111111111:ABCDE --id 123456789
 Message sent to Telegram
 ```
 
+### Screenshot
+
 ![](https://raw.githubusercontent.com/Amet13/twertb/master/misc/screenshot.jpg)
 
 ## Autoupdate databases
