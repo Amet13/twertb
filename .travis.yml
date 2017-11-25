@@ -1,4 +1,4 @@
-# Add variables TOKEN and ID in TravisCI settings
+# Do not forget to add variables TOKEN and ID in TravisCI settings
 
 language: python
 

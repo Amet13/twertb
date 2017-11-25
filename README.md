@@ -46,7 +46,9 @@ $ python3 twertb -s GBP -t RUB -g no
 ### Now you can run script with your token and ID:
 
 ```
-$ python3 twertb -s EUR -t USD -g no --token 111111111:ABCDE --id 123456789
+TOKEN='111111111:ABCDE'
+ID='123456789'
+$ python3 twertb -s EUR -t USD -g no --token ${TOKEN} --id ${ID}
 1EUR = 1.193USD at 2017-11-25T12:04:46+0000
 Message sent to Telegram
 ```
@@ -59,7 +61,7 @@ Message sent to Telegram
 
 ```
 $ crontab -e
-*/5 * * * * cd /path/to/twertb/ ; /usr/bin/python3 __main__.py -s EUR -t USD -g yes --token 111111111:ABCDE --id 123456789 &> /dev/null
+*/5 * * * * cd /path/to/twertb/ ; ./__main__.py -s EUR -t USD -g yes --token ${TOKEN} --id ${ID} &> /dev/null
 ```
 
 ## TODO
