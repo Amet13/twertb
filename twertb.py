@@ -64,7 +64,8 @@ def getCurrency():
     for each in currency_data:
         if each['source'] == source and each['target'] == target:
             global exchange_res
-            exchange_res = '1{0} = {1}{2} at {3}'.format(source, each['rate'], target, each['time'])
+            #exchange_res = '1{0} = {1}{2} at {3}'.format(source, each['rate'], target, each['time'])
+            exchange_res = '1 {0} = **{1}** {2}'.format(source, each['rate'], target)
             print(exchange_res)
 
 def sendToTelegram():

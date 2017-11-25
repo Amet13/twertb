@@ -5,7 +5,4 @@ python:
   - "3.6"
 
 script:
-  - ./twertb.py -s EUR -t USD
-  - ./twertb.py -s RUB -t USD -u
-  - ./twertb.py -s RUB -t USD  --token ${TOKEN} --id ${ID}
   - ./twertb.py -s EUR -t RUB -u --token ${TOKEN} --id ${ID}

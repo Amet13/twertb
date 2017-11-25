@@ -3,7 +3,7 @@
 [![TravisCI](https://travis-ci.org/Amet13/twertb.svg?branch=master)](https://travis-ci.org/Amet13/twertb/)
 [![License](https://img.shields.io/badge/license-GNU_GPLv3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 
-Withdraw your money from Transferwise account with a favorable exchange rate
+Withdraw your money from TransferWise account with a favorable exchange rate
 
 ## Usage
 
@@ -62,12 +62,18 @@ Message sent to Telegram
 
 ![](https://raw.githubusercontent.com/Amet13/twertb/master/misc/screenshot.jpg)
 
-## Autoupdate databases
+## Autoupdate currencies
 
 ```
 $ crontab -e
 */5 * * * * cd /path/to/twertb/ ; ./twertb.py -s EUR -t USD -u --token ${TOKEN} --id ${ID} &> /dev/null
 ```
+
+## Serverless usage via GitHub and TravisCI
+
+Just enable daily Cron Job in TravisCI settings and get exchange rate every day.
+
+![](https://raw.githubusercontent.com/Amet13/twertb/master/misc/cronjob.jpg)
 
 ## TODO
 
