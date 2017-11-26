@@ -3,13 +3,13 @@
 
 from urllib.request import urlopen, Request
 import urllib.parse
+import urllib.error
 import re
 import json
 import argparse
 import os.path
 import datetime
 import sys
-import urllib.error
 
 tw_domain = 'https://transferwise.com'
 tw_url = tw_domain + '/tools/exchange-rate-alerts/'

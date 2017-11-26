@@ -11,7 +11,8 @@ Get a Telegram message and withdraw money from TransferWise account with favorab
 ```
 $ git clone https://github.com/Amet13/twertb
 $ python3 twertb/ -h
-usage: twertb.py [-h] [-u] -s SOURCE -t TARGET [--token TG_TOKEN] [--id TG_ID]
+usage:  [-h] [-u] -s SOURCE -t TARGET [-a ALERT] [--token TG_TOKEN]
+        [--id TG_ID]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -20,6 +21,8 @@ optional arguments:
                         source currency
   -t TARGET, --target TARGET
                         target currency
+  -a ALERT, --alert ALERT
+                        alert when 1 SOURCE goes above X TARGET
   --token TG_TOKEN      telegram token
   --id TG_ID            telegram id
 ```
@@ -66,7 +69,7 @@ $ crontab -e
 
 ## Get a Telegram message when exchange rate is favorable
 
-Add to cron task for every 10 minutes checks and get alert when 1 EUR > 70 RUB:
+Add to cron task for every 10 minutes checks and get alert when `1 EUR > 70 RUB`:
 ```
 $ crontab -e
 */10 * * * * /usr/bin/python3 /path/to/twertb/ -s EUR -t RUB -u -a 70 --token ${TOKEN} --id ${ID} &> /dev/null
