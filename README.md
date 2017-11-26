@@ -3,16 +3,14 @@
 [![TravisCI](https://travis-ci.org/Amet13/twertb.svg?branch=master)](https://travis-ci.org/Amet13/twertb/)
 [![License](https://img.shields.io/badge/license-GNU_GPLv3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 
-Withdraw your money from TransferWise account with a favorable exchange rate
+Get a Telegram message and withdraw money from TransferWise account with favorable exchange rate
 
 ## Usage
 
-### Clone repo and get help:
-
+**Clone repo and get help:**
 ```
 $ git clone https://github.com/Amet13/twertb
-$ cd twertb/
-$ ./twertb.py -h
+$ python3 twertb/ -h
 usage: twertb.py [-h] [-u] -s SOURCE -t TARGET [--token TG_TOKEN] [--id TG_ID]
 
 optional arguments:
@@ -26,29 +24,27 @@ optional arguments:
   --id TG_ID            telegram id
 ```
 
-### Get last currency database and get exchange rate for `EUR/USD`:
-
+**Get last currency database and get exchange rate for `EUR/USD`:**
 ```
 $ ./twertb.py -s EUR -t USD -u
-Currency database updated
-1EUR = 1.193USD
+Currency database updated (2017-11-26 18:34:27)
+1 EUR = 1.193 USD
 ```
 
-### Get exchange rate for `GBP/RUB` without updating database:
-
+**Get exchange rate for `GBP/RUB` without updating database:**
 ```
 $ ./twertb.py -s GBP -t RUB
-1GBP = 77.88126RUB
+1 GBP = 77.88126 RUB
 ```
 
-## Send exchange rates to Telegram
+## Send exchange rates message to Telegram
 
-* go to [@BotFather](https://t.me/BotFather) and create `/newbot`, for example `TWERTB_bot`
-* then you have token like `111111111:ABCDE...`
-* after go to [@MyTelegramID_bot](https://t.me/MyTelegramID_bot) and `/start` it
-* then you have your telegram ID like `123456789`
+1. Go to [@BotFather](https://t.me/BotFather) and create `/newbot` (for example `TWERTB_bot`)
+2. You will receive a token like `111111111:ABCDE`, remember it
+3. Then go to [@MyTelegramID_bot](https://t.me/MyTelegramID_bot) and `/start` it
+4. You will receive your Telegram ID like `123456789`, also remember it
 
-### Now you can run script with your token and ID:
+## Run script with your token and ID
 
 ```
 TOKEN='111111111:ABCDE'
@@ -62,12 +58,13 @@ Message sent to Telegram
 
 ## Autoupdate currencies
 
+Add to cron a job for updating a currencies database (for example every two hours):
 ```
 $ crontab -e
-*/5 * * * * cd /path/to/twertb/ ; ./twertb.py -s EUR -t RUB -u --token ${TOKEN} --id ${ID} &> /dev/null
+* */2 * * * /usr/bin/python3 /path/to/twertb/ -s EUR -t RUB -u &> /dev/null
 ```
 
-## Serverless usage via GitHub and TravisCI
+## Serverless bot usage via GitHub and TravisCI
 
 Just enable daily Cron Job in TravisCI settings and get exchange rate every day.
 
