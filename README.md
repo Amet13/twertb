@@ -64,6 +64,14 @@ $ crontab -e
 * */2 * * * /usr/bin/python3 /path/to/twertb/ -s EUR -t RUB -u &> /dev/null
 ```
 
+## Get a Telegram message when exchange rate is favorable
+
+Add to cron task for every 10 minutes checks and get alert when 1 EUR > 70 RUB:
+```
+$ crontab -e
+*/10 * * * * /usr/bin/python3 /path/to/twertb/ -s EUR -t RUB -u -a 70 --token ${TOKEN} --id ${ID} &> /dev/null
+```
+
 ## Serverless bot usage via GitHub and TravisCI
 
 Just enable daily Cron Job in TravisCI settings and get exchange rate every day.

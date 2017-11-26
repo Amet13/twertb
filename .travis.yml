@@ -6,3 +6,10 @@ python:
 
 script:
   - ./twertb.py -s EUR -t RUB -u --token ${TOKEN} --id ${ID}
+  - ./twertb.py -s EUR -t RUB -u -a 70 --token ${TOKEN} --id ${ID}
+  # Check when target does not set
+  - ./twertb.py -s EUR ; [[ $? -eq 2 ]]
+  # Check when alert uses without database updating
+  - ./twertb.py -s EUR -t RUB -a 69 ; [[ $? -eq 1 ]]
+  # Check when token or id incorrect
+  - ./twertb.py -s EUR -t RUB --token 123 --id ${ID} ; [[ $? -eq 1 ]]
