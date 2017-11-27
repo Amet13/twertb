@@ -11,7 +11,7 @@ Get a Telegram message and withdraw money from TransferWise account with favorab
 ```
 $ git clone https://github.com/Amet13/twertb
 $ python3 twertb/ -h
-usage:  [-h] [-u] -s SOURCE -t TARGET [-a ALERT] [--token TG_TOKEN]
+usage:  [-h] [-u] [-s SOURCE] [-t TARGET] [-a ALERT] [-p] [--token TG_TOKEN]
         [--id TG_ID]
 
 optional arguments:
@@ -23,6 +23,7 @@ optional arguments:
                         target currency
   -a ALERT, --alert ALERT
                         alert when 1 SOURCE goes above X TARGET
+  -p, --print           print available currencies
   --token TG_TOKEN      telegram token
   --id TG_ID            telegram id
 ```
@@ -38,6 +39,17 @@ Currency database updated (2017-11-26 18:34:27)
 ```
 $ ./twertb.py -s GBP -t RUB
 1 GBP = 77.88126 RUB
+```
+
+**Show available currencies:**
+```
+$ ./twertb.py -p
+Available currencies:
+"AED", "United Arabian Emirates"
+"AUD", "Australia"
+"BDT", "Bangladeshi Taka"
+"BGN", "Bulgaria"
+...
 ```
 
 ## Send exchange rates message to Telegram
@@ -64,7 +76,7 @@ Message sent to Telegram
 Add to cron a job for updating a currencies database (for example every two hours):
 ```
 $ crontab -e
-* */2 * * * /usr/bin/python3 /path/to/twertb/ -s EUR -t RUB -u &> /dev/null
+* */2 * * * /usr/bin/python3 /path/to/twertb/ -u &> /dev/null
 ```
 
 ## Get a Telegram message when exchange rate is favorable

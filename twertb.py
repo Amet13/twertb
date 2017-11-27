@@ -23,28 +23,39 @@ def checkFile():
 def parseArguments():
     parser = argparse.ArgumentParser()
     parser.add_argument('-u', '--update', dest='UPDATE', action='store_true', help='update currency rates')
-    parser.add_argument('-s', '--source', dest='SOURCE', required=True, help='source currency')
-    parser.add_argument('-t', '--target', dest='TARGET', required=True, help='target currency')
+    parser.add_argument('-s', '--source', dest='SOURCE', help='source currency')
+    parser.add_argument('-t', '--target', dest='TARGET', help='target currency')
     parser.add_argument('-a', '--alert', dest='ALERT', help='alert when 1 SOURCE goes above X TARGET')
+    parser.add_argument('-p', '--print', dest='CURRENCIES', action='store_true', help='print available currencies')
     parser.add_argument('--token', dest='TG_TOKEN', help='telegram token')
     parser.add_argument('--id', dest='TG_ID', help='telegram id')
     namespace = parser.parse_args()
 
-    global update_currency, source, target, alert, tg_token, tg_id
+    global update_currency, source, target, alert, currencies, tg_token, tg_id
     update_currency = namespace.UPDATE
     source = namespace.SOURCE
     target = namespace.TARGET
     alert = namespace.ALERT
+    currencies = namespace.CURRENCIES
     tg_token = namespace.TG_TOKEN
     tg_id = namespace.TG_ID
 
-    if source == target:
+    if source == None or target == None:
+        print('Please set SOURCE and TARGET currency correctly')
+        sys.exit(1)
+
+    if source != None and target != None and source == target:
         print('You can\'t convert {0} to same currency'.format(source))
         sys.exit(1)
 
     if update_currency is False and alert is not None:
         print('You can\'t use -a (--alert) argument without -u (--update)')
         sys.exit(1)
+
+    if currencies is True:
+        print('Available currencies:')
+        getCurrenciesList()
+        sys.exit(0)
 
 def getJsLink():
     url = Request(tw_url)
@@ -98,6 +109,15 @@ def checkAlert():
         print('{0} < {1}'.format(float(alert), float(exchange_rate)))
         if tg_token and tg_id:
             sendToTelegram()
+
+def getCurrenciesList():
+    url = Request(tw_domain + getJsLink())
+    url.add_header('User-Agent', tw_header)
+    text = urlopen(url).read().decode('utf-8')
+    currencies = re.findall('code:\"[A-Z]*\",country:\"\w*.\w*.\w*\"', text)
+    for countrycode in currencies:
+        data = re.findall('"[a-zA-Z]*.\w*.\w*\"', countrycode)
+        print(', '.join(data))
 
 def main():
     parseArguments()
