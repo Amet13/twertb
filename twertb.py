@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from urllib.request import urlopen, Request
-import urllib.parse
-import urllib.error
+import urllib
 import re
 import json
 import argparse
@@ -27,8 +26,8 @@ def parseArguments():
     parser.add_argument('-t', '--target', dest='TARGET', help='target currency')
     parser.add_argument('-a', '--alert', dest='ALERT', help='alert when 1 SOURCE goes above X TARGET')
     parser.add_argument('-p', '--print', dest='CURRENCIES', action='store_true', help='print available currencies')
-    parser.add_argument('--token', dest='TG_TOKEN', help='telegram token')
-    parser.add_argument('--id', dest='TG_ID', help='telegram id')
+    parser.add_argument('-o', '--token', dest='TG_TOKEN', help='telegram token')
+    parser.add_argument('-i', '--id', dest='TG_ID', help='telegram id')
     namespace = parser.parse_args()
 
     global update_currency, source, target, alert, currencies, tg_token, tg_id
@@ -41,8 +40,9 @@ def parseArguments():
     tg_id = namespace.TG_ID
 
     if source == None or target == None:
-        print('Please set SOURCE and TARGET currency correctly')
-        sys.exit(1)
+        if update_currency == None and currencies == None:
+            print('Please set SOURCE and TARGET currency correctly')
+            sys.exit(1)
 
     if source != None and target != None and source == target:
         print('You can\'t convert {0} to same currency'.format(source))
@@ -76,7 +76,6 @@ def getJsonData():
     url.add_header('authorization', 'Basic ' + getToken())
     text = urlopen(url).read().decode('utf-8')
     parsed = json.loads(text)
-
     with open(output_json_file, 'w') as file:
         file.write(json.dumps(parsed, indent=4, sort_keys=True))
     print('Currency database updated ({0})' \
@@ -84,7 +83,6 @@ def getJsonData():
 
 def getCurrency():
     currency_data = json.loads(open(output_json_file).read())
-
     for each in currency_data:
         if each['source'] == source and each['target'] == target:
             global exchange_res, exchange_rate
@@ -96,7 +94,6 @@ def sendToTelegram():
     tg_url = 'https://api.telegram.org/bot'
     tg_full = '{0}{1}/sendMessage'.format(tg_url, tg_token)
     tg_params = urllib.parse.urlencode({'chat_id': tg_id, 'text': exchange_res}).encode('utf-8')
-
     try:
         urlopen(tg_full, tg_params)
         print('Message sent to Telegram')
@@ -117,7 +114,7 @@ def getCurrenciesList():
     currencies = re.findall('code:\"[A-Z]*\",country:\"\w*.\w*.\w*\"', text)
     for countrycode in currencies:
         data = re.findall('"[a-zA-Z]*.\w*.\w*\"', countrycode)
-        print(', '.join(data))
+        print(': '.join(data).replace("\"", ""))
 
 def main():
     parseArguments()
@@ -128,6 +125,6 @@ def main():
         sendToTelegram()
     if alert:
         checkAlert()
+    sys.exit(0)
 
 main()
-sys.exit(0)

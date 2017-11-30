@@ -2,6 +2,7 @@
 
 [![TravisCI](https://travis-ci.org/Amet13/twertb.svg?branch=master)](https://travis-ci.org/Amet13/twertb/)
 [![License](https://img.shields.io/badge/license-GNU_GPLv3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
+[![Python](https://img.shields.io/badge/python-3.6-blue.svg)](https://github.com/Amet13/twertb/blob/master/.travis.yml)
 
 Get a Telegram message and withdraw money from TransferWise account with favorable exchange rate
 
@@ -11,8 +12,8 @@ Get a Telegram message and withdraw money from TransferWise account with favorab
 ```
 $ git clone https://github.com/Amet13/twertb
 $ python3 twertb/ -h
-usage:  [-h] [-u] [-s SOURCE] [-t TARGET] [-a ALERT] [-p] [--token TG_TOKEN]
-        [--id TG_ID]
+usage:  [-h] [-u] [-s SOURCE] [-t TARGET] [-a ALERT] [-p] [-o TG_TOKEN]
+        [-i TG_ID]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -24,8 +25,9 @@ optional arguments:
   -a ALERT, --alert ALERT
                         alert when 1 SOURCE goes above X TARGET
   -p, --print           print available currencies
-  --token TG_TOKEN      telegram token
-  --id TG_ID            telegram id
+  -o TG_TOKEN, --token TG_TOKEN
+                        telegram token
+  -i TG_ID, --id TG_ID  telegram id
 ```
 
 **Get last currency database and get exchange rate for `EUR/USD`:**
@@ -45,10 +47,10 @@ $ ./twertb.py -s GBP -t RUB
 ```
 $ ./twertb.py -p
 Available currencies:
-"AED", "United Arabian Emirates"
-"AUD", "Australia"
-"BDT", "Bangladeshi Taka"
-"BGN", "Bulgaria"
+AED: United Arabian Emirates
+AUD: Australia
+BDT: Bangladeshi Taka
+BGN: Bulgaria
 ...
 ```
 
