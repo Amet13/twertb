@@ -39,11 +39,6 @@ def parseArguments():
     tg_token = namespace.TG_TOKEN
     tg_id = namespace.TG_ID
 
-    if source == None or target == None:
-        if update_currency == None and currencies == None:
-            print('Please set SOURCE and TARGET currency correctly')
-            sys.exit(1)
-
     if source != None and target != None and source == target:
         print('You can\'t convert {0} to same currency'.format(source))
         sys.exit(1)
