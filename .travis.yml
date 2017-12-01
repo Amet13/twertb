@@ -5,9 +5,11 @@ python:
   - "3.6"
 
 script:
-  - ./twertb.py -s EUR -t RUB -u --token ${TOKEN} --id ${ID}
-  - ./twertb.py -s EUR -t RUB -u -a 70 --token ${TOKEN} --id ${ID}
+  - ./twertb.py -e EUR RUB -u -t $TOKEN -i $ID
+  - ./twertb.py -e EUR RUB -u -a 70 -t $TOKEN -id $ID
   # Check when alert uses without database updating
-  - ./twertb.py -s EUR -t RUB -a 69 ; [[ $? -eq 1 ]]
+  - ./twertb.py -e EUR RUB -a 69 ; [[ $? -eq 1 ]]
   # Check when token or id incorrect
-  - ./twertb.py -s EUR -t RUB --token 123 --id ${ID} ; [[ $? -eq 1 ]]
+  - ./twertb.py -e EUR RUB -t 123 -i $ID ; [[ $? -eq 1 ]]
+  # Check when source and target currencies is equal
+  - ./twertb.py -e EUR EUR

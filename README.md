@@ -12,46 +12,45 @@ Get a Telegram message and withdraw money from TransferWise account with favorab
 ```
 $ git clone https://github.com/Amet13/twertb
 $ python3 twertb/ -h
-usage:  [-h] [-u] [-s SOURCE] [-t TARGET] [-a ALERT] [-p] [-o TG_TOKEN]
-        [-i TG_ID]
+usage: [-h] [-u] [-e SOURCE TARGET] [-a ALERT] [-p] [-t TG_TOKEN] [-i TG_ID]
 
 optional arguments:
   -h, --help            show this help message and exit
   -u, --update          update currency rates
-  -s SOURCE, --source SOURCE
-                        source currency
-  -t TARGET, --target TARGET
-                        target currency
+  -e SOURCE TARGET, --exchange SOURCE TARGET
+                        source and target currency for exchange
   -a ALERT, --alert ALERT
                         alert when 1 SOURCE goes above X TARGET
   -p, --print           print available currencies
-  -o TG_TOKEN, --token TG_TOKEN
+  -t TG_TOKEN, --token TG_TOKEN
                         telegram token
   -i TG_ID, --id TG_ID  telegram id
 ```
 
 **Get last currency database and get exchange rate for `EUR/USD`:**
 ```
-$ ./twertb.py -s EUR -t USD -u
-Currency database updated (2017-11-26 18:34:27)
-1 EUR = 1.193 USD
+$ python3 twertb/ -e EUR USD -u
+Currency database updated (2017-12-01 13:49:58)
+1 EUR = 1.189 USD
 ```
 
 **Get exchange rate for `GBP/RUB` without updating database:**
 ```
-$ ./twertb.py -s GBP -t RUB
-1 GBP = 77.88126 RUB
+$ python3 twertb/ -e GBP RUB
+1 GBP = 79.14778 RUB
 ```
 
-**Show available currencies:**
+**Show available currencies (for example grep by A end E):**
 ```
-$ ./twertb.py -p
+$ python3 twertb/ -p | egrep '^A|^E'
 Available currencies:
 AED: United Arabian Emirates
 AUD: Australia
-BDT: Bangladeshi Taka
-BGN: Bulgaria
-...
+EUR: Europe
+AFN: Afghanistan
+ARS: Argentina
+EGP: Egypt
+ETB: Ethiopia
 ```
 
 ## Send exchange rates message to Telegram
@@ -66,7 +65,7 @@ BGN: Bulgaria
 ```
 TOKEN='111111111:ABCDE'
 ID='123456789'
-$ ./twertb.py -s EUR -t RUB --token ${TOKEN} --id ${ID}
+$ python3 twertb/ -e EUR RUB -t $TOKEN -i $ID
 1 EUR = 69.66249 RUB
 Message sent to Telegram
 ```
@@ -86,7 +85,7 @@ $ crontab -e
 Add to cron task for every 10 minutes checks and get alert when `1 EUR > 70 RUB`:
 ```
 $ crontab -e
-*/10 * * * * /usr/bin/python3 /path/to/twertb/ -s EUR -t RUB -u -a 70 --token ${TOKEN} --id ${ID} &> /dev/null
+*/10 * * * * /usr/bin/python3 /path/to/twertb/ -e EUR RUB -u -a 70 -t $TOKEN -i $ID &> /dev/null
 ```
 
 ## Serverless bot usage via GitHub and TravisCI
