@@ -6,10 +6,10 @@ python:
 
 script:
   - ./twertb.py -e EUR RUB -u -t $TOKEN -i $ID
-  - ./twertb.py -e EUR RUB -u -a 70 -t $TOKEN -id $ID
+  - ./twertb.py -e EUR RUB -u -a 70 -t $TOKEN -i $ID
   # Check when alert uses without database updating
   - ./twertb.py -e EUR RUB -a 69 ; [[ $? -eq 1 ]]
   # Check when token or id incorrect
   - ./twertb.py -e EUR RUB -t 123 -i $ID ; [[ $? -eq 1 ]]
   # Check when source and target currencies is equal
-  - ./twertb.py -e EUR EUR
+  - ./twertb.py -e EUR EUR ; [[ $? -eq 1 ]]
