@@ -20,11 +20,11 @@ js_file_name = '/tools/exchange-rate-alerts/static/js/main.*.js'
 output_json_file = os.path.dirname(os.path.realpath(__file__)) + json_file_name
 
 
-def checkFile():
+def check_file():
     return os.path.exists(output_json_file)
 
 
-def parseArguments():
+def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '-u', '--update',
@@ -86,11 +86,11 @@ def parseArguments():
 
     if currencies is True:
         print('Available currencies:')
-        getCurrenciesList()
+        get_currencies_list()
         sys.exit(0)
 
 
-def getJsLink():
+def get_js_link():
     url = Request(tw_url)
     url.add_header('User-Agent', tw_header)
     text = urlopen(url).read().decode('utf-8')
@@ -98,17 +98,17 @@ def getJsLink():
     return jslink
 
 
-def getToken():
-    url = Request(tw_domain + getJsLink())
+def get_token():
+    url = Request(tw_domain + get_js_link())
     url.add_header('User-Agent', tw_header)
     text = urlopen(url).read().decode('utf-8')
     token = re.search('RATE_API_TOKEN:\"(\S*)\",', text).group(1)
     return token
 
 
-def getJsonData():
+def get_json_data():
     url = Request(tw_api_url)
-    url.add_header('authorization', 'Basic ' + getToken())
+    url.add_header('authorization', 'Basic ' + get_token())
     text = urlopen(url).read().decode('utf-8')
     parsed = json.loads(text)
     with open(output_json_file, 'w') as file:
@@ -119,7 +119,7 @@ def getJsonData():
     )
 
 
-def getCurrency():
+def get_currency():
     currency_data = json.loads(open(output_json_file).read())
     for each in currency_data:
         if each['source'] == source and each['target'] == target:
@@ -129,7 +129,7 @@ def getCurrency():
             print(ex_res)
 
 
-def sendToTelegram():
+def send_to_telegram():
     tg_url = 'https://api.telegram.org/bot'
     tg_full = '{0}{1}/sendMessage'.format(tg_url, tg_token)
     tg_params = urlencode({'chat_id': tg_id, 'text': ex_res}).encode('utf-8')
@@ -141,15 +141,15 @@ def sendToTelegram():
         sys.exit(1)
 
 
-def checkAlert():
+def check_alert():
     if alert is not None and float(alert) < float(ex_rate):
         print('{0} < {1}'.format(float(alert), float(ex_rate)))
         if tg_token and tg_id:
-            sendToTelegram()
+            send_to_telegram()
 
 
-def getCurrenciesList():
-    url = Request(tw_domain + getJsLink())
+def get_currencies_list():
+    url = Request(tw_domain + get_js_link())
     url.add_header('User-Agent', tw_header)
     text = urlopen(url).read().decode('utf-8')
     currencies = re.findall('code:\"[A-Z]*\",country:\"\w*.\w*.\w*\"', text)
@@ -159,14 +159,14 @@ def getCurrenciesList():
 
 
 def main():
-    parseArguments()
-    if checkFile() is False or update_currency is True:
-        getJsonData()
-    getCurrency()
+    parse_arguments()
+    if check_file() is False or update_currency is True:
+        get_json_data()
+    get_currency()
     if tg_token and tg_id and alert is None:
-        sendToTelegram()
+        send_to_telegram()
     if alert:
-        checkAlert()
+        check_alert()
     sys.exit(0)
 
 
