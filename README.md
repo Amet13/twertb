@@ -1,6 +1,6 @@
 # TransferWise Exchange Rate Telegram Bot
 
-[![Actions Status](https://github.com/Amet13/vulncontrol/workflows/twertb/badge.svg)](https://github.com/Amet13/twertb/actions)
+[![Actions Status](https://github.com/Amet13/twertb/workflows/twertb/badge.svg)](https://github.com/Amet13/twertb/actions)
 [![License](https://img.shields.io/badge/license-GNU_GPLv3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Python](https://img.shields.io/badge/python-3.7-blue.svg)](https://github.com/Amet13/twertb/blob/master/.github/workflows/actions.yml)
 
