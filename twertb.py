@@ -15,7 +15,7 @@ tw_domain = 'https://transferwise.com'
 tw_url = tw_domain + '/tools/exchange-rate-alerts/'
 tw_header = 'Mozilla/5.0'
 tw_api_url = 'https://api.transferwise.com/v1/rates'
-json_file_name = '/misc/currencies.json'
+json_file_name = '/currencies.json'
 js_file_name = '/tools/exchange-rate-alerts/static/js/main.*.js'
 output_json_file = os.path.dirname(os.path.realpath(__file__)) + json_file_name
 
@@ -111,6 +111,7 @@ def get_json_data():
     url.add_header('authorization', 'Basic ' + get_token())
     text = urlopen(url).read().decode('utf-8')
     parsed = json.loads(text)
+    print(parsed)
     with open(output_json_file, 'w') as file:
         file.write(json.dumps(parsed, indent=4, sort_keys=True))
     print(
