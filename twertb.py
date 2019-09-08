@@ -111,7 +111,6 @@ def get_json_data():
     url.add_header('authorization', 'Basic ' + get_token())
     text = urlopen(url).read().decode('utf-8')
     parsed = json.loads(text)
-    print(parsed)
     with open(output_json_file, 'w') as file:
         file.write(json.dumps(parsed, indent=4, sort_keys=True))
     print(
