@@ -93,6 +93,6 @@ $ crontab -e
 */10 * * * * /usr/bin/python3 /path/to/twertb/ -e EUR RUB -u -a 70 -t $TOKEN -i $ID &> /dev/null
 ```
 
-## Serverless bot usage via GitHub and TravisCI
+## Serverless bot usage via GitHub
 
 Just enable daily [Cron Job](https://help.github.com/en/articles/events-that-trigger-workflows#scheduled-events) in GitHub Actions settings and get exchange rate every day.
